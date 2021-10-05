@@ -14,7 +14,7 @@ contract SpacelensToken is ERC20, Ownable, Pausable {
 	/// until amount N of token sold out or reaching a date
 	/// @dev a phase is always needed to mint
     struct Phase {
-		/// uint between 0 - 100 to mul with the price on sells
+		/// uint between 0(0.0%) - 1000(100.0%) to mul with the price on sells
         uint256 discount;
 		/// timestamp when this phase ends
         uint256 end;
@@ -67,7 +67,7 @@ contract SpacelensToken is ERC20, Ownable, Pausable {
 	function createPhase(uint256 _discount, uint256 _end, uint256 _supply) external onlyOwner {
 		Phase storage p = phases[lastPhase++];
 
-		require(_discount < 101, "Discount cannot be greater than 100%");
+		require(_discount < 1001, "Discount cannot be greater than 100%");
 		p.discount = _discount;
 
 		require(block.timestamp < _end, "The end of the phase should be greater than now");
@@ -94,7 +94,7 @@ contract SpacelensToken is ERC20, Ownable, Pausable {
 		require(phases[currentPhase].supply >= _tokenAmount, "not enought supply");
 		require(msg.value > 0, "not ETH");
 		/// calculation: tokens / (price * (100 - discount) / 100)
-		uint256 finalPrice = (_tokenAmount / (spacePrice * (100 - phases[currentPhase].discount))) / 100;
+		uint256 finalPrice = (_tokenAmount / (spacePrice * (1000 - phases[currentPhase].discount))) / 1000;
 		require(finalPrice <= msg.value, "not enough eth");
 		_mint(msg.sender, _tokenAmount);
 		/// change currenta phase total supply
