@@ -1,8 +1,14 @@
-# ERC20 emissions
+## TODO 📝
 
-This is the draft, it is an initial phase of the contract that allows users to invest funds, to later obtain a reward exchangeable for NFTs.
-
-[**Planing**](https://docs.google.com/document/d/1u8cs_PrxGBKHLk9jD1hM3G9rWKKh6PRRvu39L9QyFG8/edit?ts=60e5a921#heading=h.s2ybe8291aua)  
+- agregar prettier
+✔️ agregar decimales en los porcentajes e.g. permitir => 35.5%
+- aplicar el minimum_token
+- agregar eventos
+- cambiar cuando cambia de phase y no hay phase proxima
+- feature: getcurrentPhase
+- feature: modificion de phases
+- agregar subgraph para listado de clientes
+- hacer un deploy con hardhat y subirlo a una testnet
 
 ### Pre-requisites 📋
 

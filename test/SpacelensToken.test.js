@@ -25,7 +25,7 @@ contract("Spacelens Token", ([owner, user]) => {
   });
 
   it("Init first phase", async function () {
-    const discount = 50 /** 50% */,
+    const discount = 505 /** 50.5% */,
       dateEndPhase =
         Number(await time.latest()) + 3600 /** the phase will last one hour */,
       supply = toBN(1000);
@@ -51,7 +51,7 @@ contract("Spacelens Token", ([owner, user]) => {
   it("Errors creating phases", async function () {
     /// err 200% discount
     await expectRevert(
-      spaceToken.createPhase(200, (await time.latest()) + 1, toBN(1), {
+      spaceToken.createPhase(2000, (await time.latest()) + 1, toBN(1), {
         from: owner,
       }),
       "Discount cannot be greater than 100%"
@@ -73,7 +73,7 @@ contract("Spacelens Token", ([owner, user]) => {
   });
 
   it("Init second phase", async function () {
-    const discount = 25,
+    const discount = 250 /** 25% */,
       // this phase end one hour after phase one over
       dateEndPhase = Number((await spaceToken.phases(0)).end) + 3600,
       supply = toBN(3000);
@@ -149,11 +149,11 @@ contract("Spacelens Token", ([owner, user]) => {
 
     // cal the ETH needed to this operation
     const ethNeeded =
-      Number((await spaceToken.phases(currentPhaseNumber)).supply) /
+      Math.ceil(Number((await spaceToken.phases(currentPhaseNumber)).supply) /
       (Number(await spaceToken.spacePrice()) *
-        (100 -
+        (1000 -
           Number((await spaceToken.phases(currentPhaseNumber)).discount))) /
-      100;
+      1000);
     /// err not enought ETH
     await expectRevert(
       spaceToken.buySpacelens(
