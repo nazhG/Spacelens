@@ -73,7 +73,7 @@ contract SpacelensToken is ERC20, Ownable, Pausable {
 		require(block.timestamp < _end, "The end of the phase should be greater than now");
 		p.end = _end;
 
-		require(supply >= _supply, "not enough supply to mint");
+		require(supply >= _supply, "Not enough supply to mint");
 		/// supply will decrease with each phase
 		/// if the supply reaches 0 means that the cap of token are distributed in the phases
 		supply -= _supply;
@@ -91,11 +91,12 @@ contract SpacelensToken is ERC20, Ownable, Pausable {
 		if (block.timestamp > phases[currentPhase].end) {
 			currentPhase++;
 		}
-		require(phases[currentPhase].supply >= _tokenAmount, "not enought supply");
+		require(phases[currentPhase].supply >= _tokenAmount, "Not enought supply");
 		require(msg.value > 0, "not ETH");
+		require(_tokenAmount >= minimumToken, "There are too few tokens");
 		/// calculation: tokens / (price * (100 - discount) / 100)
 		uint256 finalPrice = (_tokenAmount / (spacePrice * (1000 - phases[currentPhase].discount))) / 1000;
-		require(finalPrice <= msg.value, "not enough eth");
+		require(finalPrice <= msg.value, "Not enough eth");
 		_mint(msg.sender, _tokenAmount);
 		/// change currenta phase total supply
 		phases[currentPhase].supply -= _tokenAmount;

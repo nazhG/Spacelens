@@ -16,7 +16,7 @@ contract("Spacelens Token", ([owner, user]) => {
   let spaceToken;
   const maxSupply = toBN(10000),
     price = 5 /** 1 ETH = 5 Tokens */,
-    min = toBN(1);
+    min = toBN(2);
 
   before(async function () {
     spaceToken = await SpacelensToken.new(maxSupply, price, min, owner, {
@@ -68,7 +68,7 @@ contract("Spacelens Token", ([owner, user]) => {
       spaceToken.createPhase(1, (await time.latest()) + 1, maxSupply, {
         from: owner,
       }),
-      "not enough supply to mint"
+      "Not enough supply to mint"
     );
   });
 
@@ -162,7 +162,15 @@ contract("Spacelens Token", ([owner, user]) => {
         ).supply,
         { from: user, value: ethNeeded - 10 }
       ),
-      "not enough eth"
+      "Not enough eth"
+    );
+    /// err not enought tokens
+    await expectRevert(
+      spaceToken.buySpacelens(
+        toBN(1),
+        { from: user, value: ethNeeded }
+      ),
+      "There are too few tokens"
     );
 
     await spaceToken.buySpacelens(
@@ -206,7 +214,7 @@ contract("Spacelens Token", ([owner, user]) => {
     });
 	
 	/// create the last phase (3)
-    await spaceToken.buySpacelens(1, { from: user, value: 1 });
+    await spaceToken.buySpacelens(toBN(2), { from: user, value: toBN(1) });
 
 	/// check this phase change
     assert.equal(
