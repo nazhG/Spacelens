@@ -15,6 +15,11 @@ module.exports = {
         blockNumber: 12404000
       }
     },
+    testnet: {
+      url: `https://eth-rinkeby.alchemyapi.io/v2/${ process.env.ALCHEMY_TESTNET }`,
+      accounts: [`0x${ process.env.PRIVATE_KEY }`],
+      chainID: 4,
+    }
   },
   gasReporter: {
     enabled: true,

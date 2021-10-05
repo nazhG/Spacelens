@@ -9,7 +9,7 @@
 ✔️ feature: modificion de phases
 ✔️ dispatcher changes
 - agregar subgraph para listado de clientes
-- hacer un deploy con hardhat y subirlo a una testnet
+⚠️ hacer un deploy con hardhat y subirlo a una testnet
 
 ### Pre-requisites 📋
 
