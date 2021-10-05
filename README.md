@@ -1,9 +1,9 @@
 ## TODO 📝
 
-- agregar prettier
+✔️ agregar prettier
 ✔️ agregar decimales en los porcentajes e.g. permitir => 35.5%
 ✔️ aplicar el minimum_token
-- agregar eventos
+✔️ agregar eventos
 ✔️ cambiar cuando cambia de phase y no hay phase proxima
 ✔️ feature: getcurrentPhase
 ✔️ feature: modificion de phases
