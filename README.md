@@ -5,8 +5,8 @@
 ✔️ aplicar el minimum_token
 - agregar eventos
 ✔️ cambiar cuando cambia de phase y no hay phase proxima
-- feature: getcurrentPhase
-- feature: modificion de phases
+✔️ feature: getcurrentPhase
+✔️ feature: modificion de phases
 - agregar subgraph para listado de clientes
 - hacer un deploy con hardhat y subirlo a una testnet
 
