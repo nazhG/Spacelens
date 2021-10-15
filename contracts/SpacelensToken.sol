@@ -17,6 +17,8 @@ contract SpacelensToken is Ownable, Pausable {
         uint256 discount;
         /// timestamp when this phase ends
         uint256 endAt;
+        /// initial supply
+        uint256 initSupply;
         /// uint that decreases when sold in phase
         /// @note to know the original supply look up in logs
         uint256 supply;
@@ -102,6 +104,8 @@ contract SpacelensToken is Ownable, Pausable {
             "The end of the phase should be greater than now"
         );
         p.endAt = _endAt;
+
+        p.initSupply = _supply;
 
         require(supply >= _supply, "Not enough supply to mint");
         /// supply will decrease with each phase
